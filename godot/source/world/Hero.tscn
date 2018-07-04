@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://source/world/Hero.gd" type="Script" id=1]
+[ext_resource path="res://assets/square.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 50, 50 )
+
+[node name="Hero" type="RigidBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 6
+mode = 0
+mass = 10.0
+friction = 1.0
+bounce = 0.1
+gravity_scale = 5.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+speed = 100
+jump_force = 800
+normal_speed = 100
+super_speed = 500
+normal_jump_force = 800
+super_jump_force = 1500
+super_time_scale = 0.2
+superhero_mode = false
+
+[node name="Shape" type="CollisionShape2D" parent="." index="0"]
+
+scale = Vector2( 0.2, 0.2 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+
+
