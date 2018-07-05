@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://source/world/Wall.tscn" type="PackedScene" id=1]
+
+[node name="Walls" type="Node2D" index="0"]
+
+[node name="Left" parent="." index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 88.2, 268.2 )
+scale = Vector2( 0.1, 4 )
+
+[node name="Right" parent="." index="1" instance=ExtResource( 1 )]
+
+position = Vector2( 878.2, 268.2 )
+scale = Vector2( 0.1, 4 )
+
+[node name="Top" parent="." index="2" instance=ExtResource( 1 )]
+
+position = Vector2( 483.2, 63.2 )
+scale = Vector2( 8, 0.1 )
+
+[node name="Bottom" parent="." index="3" instance=ExtResource( 1 )]
+
+position = Vector2( 484.2, 471.4 )
+scale = Vector2( 8, 0.1 )
+
+
