@@ -12,7 +12,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_down"):
 		hero.move_down()
 	if Input.is_action_just_pressed("action"):
-		hero.toggle_superpower_mode()
+		Shortcuts.superhero_mode.toggle()
 	
 	if Input.is_action_just_released("move_left"):
 		hero.stop_moving()

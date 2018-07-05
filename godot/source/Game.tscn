@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://source/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/mechanics/ArrowShooter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/mechanics/PlayerControl.gd" type="Script" id=3]
-[ext_resource path="res://source/juice/Trail.tscn" type="PackedScene" id=4]
-[ext_resource path="res://source/juice/DeathAnimation.tscn" type="PackedScene" id=5]
-[ext_resource path="res://source/world/Walls.tscn" type="PackedScene" id=6]
-[ext_resource path="res://source/world/Hero.tscn" type="PackedScene" id=7]
-[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=8]
+[ext_resource path="res://source/mechanics/SuperheroMode.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/juice/Trail.tscn" type="PackedScene" id=5]
+[ext_resource path="res://source/juice/DeathAnimation.tscn" type="PackedScene" id=6]
+[ext_resource path="res://source/world/Walls.tscn" type="PackedScene" id=7]
+[ext_resource path="res://source/world/Hero.tscn" type="PackedScene" id=8]
+[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=9]
 
 [node name="Game" type="Node" index="0"]
 
@@ -26,25 +27,26 @@ amount = 30
 
 script = ExtResource( 3 )
 
+[node name="SuperheroMode" parent="Mechanics" index="2" instance=ExtResource( 4 )]
+
 [node name="Juice" type="Node" parent="." index="1"]
 
-[node name="Trail" parent="Juice" index="0" instance=ExtResource( 4 )]
+[node name="Trail" parent="Juice" index="0" instance=ExtResource( 5 )]
 
 points = PoolVector2Array( 180, 530 )
 
-[node name="DeathAnimation" parent="Juice" index="1" instance=ExtResource( 5 )]
+[node name="DeathAnimation" parent="Juice" index="1" instance=ExtResource( 6 )]
 
 [node name="World" type="Node" parent="." index="2"]
 
-[node name="Walls" parent="World" index="0" instance=ExtResource( 6 )]
+[node name="Walls" parent="World" index="0" instance=ExtResource( 7 )]
 
-[node name="Hero" parent="World" index="1" instance=ExtResource( 7 )]
+[node name="Hero" parent="World" index="1" instance=ExtResource( 8 )]
 
 position = Vector2( 130, 430 )
 bounce = 0.0
 linear_damp = 1.0
 _sections_unfolded = [ "Collision", "Linear", "Transform" ]
-super_time_scale = 0.25
 
 [node name="UI" type="Control" parent="." index="3"]
 
@@ -64,7 +66,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="GameOverScreen" parent="UI" index="0" instance=ExtResource( 8 )]
+[node name="GameOverScreen" parent="UI" index="0" instance=ExtResource( 9 )]
 
 [connection signal="last_arrow_hit" from="Mechanics/ArrowShooter" to="World/Hero" method="toggle_superpower_mode"]
 

@@ -14,7 +14,7 @@ var last_arrow
 func _ready():
 	Replayer.connect("started_replaying", self, "free_all_arrows")
 	Replayer.connect_arrow_shooter()
-	Shortcuts.hero.connect("got_superpower", self, "start_shooting", [], CONNECT_ONESHOT)
+	Shortcuts.superhero_mode.connect("on", self, "start_shooting", [], CONNECT_ONESHOT)
 
 func free_all_arrows():
 	for arrow in get_tree().get_nodes_in_group("Arrows"):

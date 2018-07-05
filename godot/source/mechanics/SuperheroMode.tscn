@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://source/mechanics/SuperheroMode.gd" type="Script" id=1]
+
+[node name="SuperheroMode" type="Node" index="0"]
+
+script = ExtResource( 1 )
+normal_speed = 100
+super_speed = 500
+normal_jump_force = 800
+super_jump_force = 1500
+super_time_scale = 0.2
+superhero_mode = false
+
+

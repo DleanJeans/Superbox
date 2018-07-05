@@ -2,37 +2,12 @@ extends RigidBody2D
 
 signal died
 signal hit_by_arrow(arrow)
-signal got_superpower
 
 export(int) var speed = 100
 export(int) var jump_force = 800
 
-export(int) var normal_speed = 100
-export(int) var super_speed = 500
-
-export(int) var normal_jump_force = 800
-export(int) var super_jump_force = 1500
-export(float) var super_time_scale = 0.2
-
 var input_vector = Vector2()
 var dead = false
-
-export(bool) var superhero_mode = false setget set_superhero_mode
-func set_superhero_mode(enabled):
-	superhero_mode = enabled
-	
-	if enabled:
-		emit_signal("got_superpower")
-		speed = super_speed
-		jump_force = super_speed
-		Engine.time_scale = super_time_scale
-	else:
-		speed = normal_speed
-		jump_force = normal_jump_force
-		Engine.time_scale = 1
-
-func toggle_superpower_mode():
-	self.superhero_mode = not superhero_mode
 
 func hit_by_arrow(arrow):
 	if dead: return
@@ -43,7 +18,7 @@ func hit_by_arrow(arrow):
 func die():
 	emit_signal("died")
 	dead = true
-	self.superhero_mode = false
+	Shortcuts.superhero_mode.off()
 
 func move_left():
 	if input_vector.x > 0:
@@ -58,7 +33,6 @@ func move_right():
 func move_up():
 	var colliders = get_colliding_bodies()
 	if colliders.has(Shortcuts.bottom_wall):
-#	if colliders.size() > 0 and colliders[0].get_parent().name == "Walls":
 		input_vector.y = -1
 	else: input_vector.y = 0
 

@@ -33,3 +33,7 @@ func get_bottom_wall():
 var arrow_shooter setget , get_arrow_shooter
 func get_arrow_shooter():
 	return $"/root/Game/Mechanics/ArrowShooter"
+
+var superhero_mode setget , get_superhero_mode
+func get_superhero_mode():
+	return $"/root/Game/Mechanics/SuperheroMode"
