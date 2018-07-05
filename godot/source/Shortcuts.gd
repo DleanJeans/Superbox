@@ -45,3 +45,7 @@ func get_restarter():
 #var name setget , get_name
 #func get_name():
 #	return $"/root/Game/"
+
+var thank_you_screen setget , get_thanks_screen
+func get_thanks_screen():
+	return $"/root/Game/UI/ThankYouScreen"

@@ -1,3 +1,3 @@
 extends Node
 
-var scenario = 1
+var scenario = 0

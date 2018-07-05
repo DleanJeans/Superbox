@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://source/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/mechanics/ArrowShooter.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://resources/FowardFont20.tres" type="DynamicFont" id=10]
 [ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=11]
 [ext_resource path="res://source/ui/ScenarioScreen.tscn" type="PackedScene" id=12]
+[ext_resource path="res://source/ui/ThankYouScreen.tscn" type="PackedScene" id=13]
 
 [node name="Game" type="Node" index="0"]
 
@@ -101,6 +102,8 @@ _sections_unfolded = [ "custom_fonts" ]
 
 showing_duration = 1.5
 
+[node name="ThankYouScreen" parent="UI" index="3" instance=ExtResource( 13 )]
+
 [connection signal="last_arrow_hit" from="Mechanics/ArrowShooter" to="Mechanics/SuperheroMode" method="toggle"]
 
 [connection signal="on" from="Mechanics/SuperheroMode" to="UI/Instruction" method="hide"]
@@ -108,6 +111,8 @@ showing_duration = 1.5
 [connection signal="died" from="World/Hero" to="Mechanics/ArrowShooter" method="stop_shooting"]
 
 [connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show_delayed"]
+
+[connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/ArrowShooter" method="free_all_arrows"]
 
 [connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
 
