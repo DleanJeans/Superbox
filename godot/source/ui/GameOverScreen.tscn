@@ -13,7 +13,7 @@ control = false
 meta = false
 command = false
 pressed = true
-scancode = 32
+scancode = 82
 unicode = 0
 echo = false
 

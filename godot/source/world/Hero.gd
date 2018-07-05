@@ -43,6 +43,7 @@ func hit_by_arrow(arrow):
 func die():
 	emit_signal("died")
 	dead = true
+	self.superhero_mode = false
 
 func move_left():
 	if input_vector.x > 0:
