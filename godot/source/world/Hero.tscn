@@ -1,12 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://source/world/Hero.gd" type="Script" id=1]
 [ext_resource path="res://assets/square.png" type="Texture" id=2]
+[ext_resource path="res://source/world/MoveUp.gd" type="Script" id=3]
+[ext_resource path="res://source/world/IntegrateForces.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 50, 50 )
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 20.0
 
 [node name="Hero" type="RigidBody2D" index="0"]
 
@@ -32,12 +39,6 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
 speed = 100
 jump_force = 800
-normal_speed = 100
-super_speed = 500
-normal_jump_force = 800
-super_jump_force = 1500
-super_time_scale = 0.2
-superhero_mode = false
 
 [node name="Shape" type="CollisionShape2D" parent="." index="0"]
 
@@ -48,5 +49,40 @@ shape = SubResource( 1 )
 
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
+
+[node name="JumpTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = false
+
+[node name="WallCollision" type="Area2D" parent="." index="3"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="Shape" type="CollisionShape2D" parent="WallCollision" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="MoveUp" type="Node" parent="." index="4"]
+
+script = ExtResource( 3 )
+
+[node name="IntegrateForces" type="Node" parent="." index="5"]
+
+script = ExtResource( 4 )
+
+[connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
 
 

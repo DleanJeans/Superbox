@@ -31,28 +31,16 @@ func move_right():
 	else: input_vector.x = 1
 
 func move_up():
-	var colliders = get_colliding_bodies()
-	if colliders.has(Shortcuts.bottom_wall):
-		input_vector.y = -1
-	else: input_vector.y = 0
+	$MoveUp.call()
 
 func move_down():
-	pass
+	input_vector.y = 1
 
 func stop_moving():
 	input_vector = Vector2()
 
+func _on_JumpTimer_timeout():
+	input_vector.y = 0
+
 func _integrate_forces(state):
-	apply_impulse(Vector2(), input_vector * speed)
-	if abs(linear_velocity.x) > speed:
-		linear_velocity.x = speed * sign(linear_velocity.x)
-	
-	if input_vector.x < 0:
-		state.angular_velocity = -PI * 2
-	elif input_vector.x > 0:
-		state.angular_velocity = PI * 2
-	
-	if input_vector.y < 0:
-		var vertical = input_vector
-		vertical.x = 0
-		apply_impulse(Vector2(), vertical * jump_force)
+	$IntegrateForces.call(state)

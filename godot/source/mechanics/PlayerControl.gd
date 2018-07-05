@@ -7,7 +7,7 @@ func _physics_process(delta):
 		hero.move_left()
 	if Input.is_action_pressed("move_right"):
 		hero.move_right()
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_just_pressed("move_up"):
 		hero.move_up()
 	if Input.is_action_pressed("move_down"):
 		hero.move_down()
