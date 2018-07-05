@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://source/ui/ScenarioScreen.gd" type="Script" id=1]
 [ext_resource path="res://resources/FowardFont100.tres" type="DynamicFont" id=2]
 [ext_resource path="res://resources/FowardFont50.tres" type="DynamicFont" id=3]
+[ext_resource path="res://source/ui/Instruction.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 
@@ -116,6 +117,10 @@ process_mode = 1
 wait_time = 1.0
 one_shot = true
 autostart = false
+
+[node name="Instruction" parent="." index="5" instance=ExtResource( 4 )]
+
+text = "CLICK or SPACE to skip"
 
 [connection signal="timeout" from="Timer" to="." method="_scroll_up"]
 

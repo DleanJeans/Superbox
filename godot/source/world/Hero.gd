@@ -12,13 +12,13 @@ var dead = false
 func hit_by_arrow(arrow):
 	if dead: return
 	
-	emit_signal("hit_by_arrow", arrow)
 	die()
+	emit_signal("hit_by_arrow", arrow)
 
 func die():
-	emit_signal("died")
 	dead = true
 	Shortcuts.superhero_mode.off()
+	emit_signal("died")
 
 func move_left():
 	if input_vector.x > 0:

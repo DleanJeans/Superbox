@@ -22,12 +22,14 @@ func _add_scenario_functions():
 
 func _play_current_scenario():
 	scenarios[GameData.scenario].call_func()
+	Shortcuts.superhero_mode.allow_to_turn = true
 
 func _start_next_scenario_if_hero_survives():
 	yield(Shortcuts.arrow_shooter, "last_arrow_hit")
 	while Shortcuts.hero.dead:
 		yield(Shortcuts.arrow_shooter, "last_arrow_hit")
 	
+	Shortcuts.superhero_mode.allow_to_turn = false
 	yield(get_tree().create_timer(1), "timeout")
 	_start_next_scenario()
 
