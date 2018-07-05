@@ -18,10 +18,6 @@ var ui setget , get_ui
 func get_ui():
 	return $"/root/Game/UI"
 
-#var name setget , get_name
-#func get_name():
-#	return $"/root/Game/"
-
 var hero setget , get_hero
 func get_hero():
 	return $"/root/Game/World/Hero"
@@ -37,3 +33,15 @@ func get_arrow_shooter():
 var superhero_mode setget , get_superhero_mode
 func get_superhero_mode():
 	return $"/root/Game/Mechanics/SuperheroMode"
+
+var scenario_screen setget , get_scenario_screen
+func get_scenario_screen():
+	return $"/root/Game/UI/ScenarioScreen"
+
+var restarter setget , get_restarter
+func get_restarter():
+	return $"/root/Game/Mechanics/Restarter"
+
+#var name setget , get_name
+#func get_name():
+#	return $"/root/Game/"

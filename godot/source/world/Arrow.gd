@@ -25,10 +25,10 @@ func _process_collision():
 	
 	if collider == Shortcuts.hero:
 		Shortcuts.hero.hit_by_arrow(self)
-		_disable_hero_collision()
 	else:
 		set_physics_process(false)
 	
+	_disable_hero_collision()
 	emit_signal("hit")
 
 func _disable_hero_collision():
