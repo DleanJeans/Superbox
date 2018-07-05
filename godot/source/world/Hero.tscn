@@ -12,7 +12,7 @@ extents = Vector2( 50, 50 )
 
 input_pickable = false
 collision_layer = 1
-collision_mask = 6
+collision_mask = 2
 mode = 0
 mass = 10.0
 friction = 1.0
@@ -29,7 +29,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 speed = 100
 jump_force = 800
 normal_speed = 100

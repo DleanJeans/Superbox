@@ -5,7 +5,6 @@ signal hit
 export(int) var speed = 100
 
 var velocity = Vector2()
-var updating_rotation = true
 var kinematic_collision
 
 func shoot(target_position):
@@ -14,24 +13,23 @@ func shoot(target_position):
 
 func _physics_process(delta):
 	kinematic_collision = move_and_collide(velocity * delta)
-	update_rotation()
-	_stick_if_hit()
+	_process_collision()
 
 func update_rotation():
-	if updating_rotation:
-		rotation = velocity.angle_to_point(Vector2())
+	rotation = velocity.angle_to_point(Vector2())
 
-func _stick_if_hit():
-	if updating_rotation and kinematic_collision != null:
-		updating_rotation = false
+func _process_collision():
+	if kinematic_collision == null: return
+	
+	var collider = kinematic_collision.collider
+	
+	if collider == Shortcuts.hero:
+		Shortcuts.hero.hit_by_arrow(self)
+		_disable_hero_collision()
+	else:
 		set_physics_process(false)
-		
-		var collider = kinematic_collision.collider
-		if collider == null:
-			queue_free()
-		if collider == Shortcuts.hero:
-			Shortcuts.hero.die()
-		collision_mask = 0
-		collision_layer = 0
-		
-		emit_signal("hit")
+	
+	emit_signal("hit")
+
+func _disable_hero_collision():
+	collision_mask = 2

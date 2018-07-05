@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 signal died
+signal hit_by_arrow(arrow)
 signal got_superpower
 
 export(int) var speed = 100
@@ -14,6 +15,7 @@ export(int) var super_jump_force = 1500
 export(float) var super_time_scale = 0.2
 
 var input_vector = Vector2()
+var dead = false
 
 export(bool) var superhero_mode = false setget set_superhero_mode
 func set_superhero_mode(enabled):
@@ -32,8 +34,15 @@ func set_superhero_mode(enabled):
 func toggle_superpower_mode():
 	self.superhero_mode = not superhero_mode
 
+func hit_by_arrow(arrow):
+	if dead: return
+	
+	emit_signal("hit_by_arrow", arrow)
+	die()
+
 func die():
 	emit_signal("died")
+	dead = true
 
 func move_left():
 	if input_vector.x > 0:

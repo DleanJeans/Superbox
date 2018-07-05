@@ -1,10 +1,8 @@
 extends Control
 
-func _on_visibility_changed():
-	if visible:
-		get_tree().paused = true
-	else:
-		get_tree().paused = false
+func show_delayed():
+	yield(get_tree().create_timer(0.5), "timeout")
+	show()
 
 func _restart():
 	hide()

@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://source/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/mechanics/ArrowShooter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/mechanics/PlayerControl.gd" type="Script" id=3]
 [ext_resource path="res://source/juice/Trail.tscn" type="PackedScene" id=4]
-[ext_resource path="res://source/world/Wall.tscn" type="PackedScene" id=5]
-[ext_resource path="res://source/world/Hero.tscn" type="PackedScene" id=6]
-[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=7]
+[ext_resource path="res://source/juice/DeathAnimation.tscn" type="PackedScene" id=5]
+[ext_resource path="res://source/world/Wall.tscn" type="PackedScene" id=6]
+[ext_resource path="res://source/world/Hero.tscn" type="PackedScene" id=7]
+[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=8]
 
 [node name="Game" type="Node" index="0"]
 
@@ -18,7 +19,7 @@ script = ExtResource( 1 )
 
 position = Vector2( 390, 100 )
 _sections_unfolded = [ "Transform" ]
-advanced = false
+advanced = true
 amount = 30
 
 [node name="PlayerControl" type="Node" parent="Mechanics" index="1"]
@@ -29,7 +30,9 @@ script = ExtResource( 3 )
 
 [node name="Trail" parent="Juice" index="0" instance=ExtResource( 4 )]
 
-points = PoolVector2Array( 910, 90 )
+points = PoolVector2Array( 180, 530 )
+
+[node name="DeathAnimation" parent="Juice" index="1" instance=ExtResource( 5 )]
 
 [node name="World" type="Node" parent="." index="2"]
 
@@ -37,39 +40,39 @@ points = PoolVector2Array( 910, 90 )
 
 editor/display_folded = true
 
-[node name="Left" parent="World/Walls" index="0" instance=ExtResource( 5 )]
+[node name="Left" parent="World/Walls" index="0" instance=ExtResource( 6 )]
 
 position = Vector2( 150, 300 )
 scale = Vector2( 0.1, 5 )
 
-[node name="PaddingLeft" parent="World/Walls" index="1" instance=ExtResource( 5 )]
+[node name="PaddingLeft" parent="World/Walls" index="1" instance=ExtResource( 6 )]
 
 visible = false
 position = Vector2( 100, 300 )
 scale = Vector2( 1, 6 )
 
-[node name="PaddingRight" parent="World/Walls" index="2" instance=ExtResource( 5 )]
+[node name="PaddingRight" parent="World/Walls" index="2" instance=ExtResource( 6 )]
 
 visible = false
 position = Vector2( 700, 300 )
 scale = Vector2( 1, 6 )
 
-[node name="Right" parent="World/Walls" index="3" instance=ExtResource( 5 )]
+[node name="Right" parent="World/Walls" index="3" instance=ExtResource( 6 )]
 
 position = Vector2( 650, 300 )
 scale = Vector2( 0.1, 5 )
 
-[node name="Top" parent="World/Walls" index="4" instance=ExtResource( 5 )]
+[node name="Top" parent="World/Walls" index="4" instance=ExtResource( 6 )]
 
 position = Vector2( 400, 50 )
 scale = Vector2( 5, 0.1 )
 
-[node name="Bottom" parent="World/Walls" index="5" instance=ExtResource( 5 )]
+[node name="Bottom" parent="World/Walls" index="5" instance=ExtResource( 6 )]
 
 position = Vector2( 400, 550 )
 scale = Vector2( 5, 0.1 )
 
-[node name="Hero" parent="World" index="1" instance=ExtResource( 6 )]
+[node name="Hero" parent="World" index="1" instance=ExtResource( 7 )]
 
 position = Vector2( 180, 530 )
 bounce = 0.0
@@ -95,11 +98,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="GameOverScreen" parent="UI" index="0" instance=ExtResource( 7 )]
+[node name="GameOverScreen" parent="UI" index="0" instance=ExtResource( 8 )]
 
 [connection signal="last_arrow_hit" from="Mechanics/ArrowShooter" to="World/Hero" method="toggle_superpower_mode"]
 
-[connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show"]
+[connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show_delayed"]
 
 [connection signal="died" from="World/Hero" to="Mechanics/ArrowShooter" method="stop_shooting"]
 
