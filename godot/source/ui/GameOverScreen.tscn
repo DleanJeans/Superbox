@@ -4,15 +4,22 @@
 [ext_resource path="res://resources/FowardFont100.tres" type="DynamicFont" id=2]
 [ext_resource path="res://resources/FowardFont50.tres" type="DynamicFont" id=3]
 
-[sub_resource type="InputEventAction" id=3]
+[sub_resource type="InputEventKey" id=1]
 
 device = 0
-action = "action"
+alt = false
+shift = false
+control = false
+meta = false
+command = false
 pressed = true
+scancode = 32
+unicode = 0
+echo = false
 
 [sub_resource type="ShortCut" id=2]
 
-shortcut = SubResource( 3 )
+shortcut = SubResource( 1 )
 
 [node name="GameOverScreen" type="Control" index="0"]
 
