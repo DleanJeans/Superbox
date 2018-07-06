@@ -25,12 +25,14 @@ func _play_current_scenario():
 	Shortcuts.superhero_mode.allow_to_turn = true
 
 func _start_next_scenario_if_hero_survives():
-	yield(Shortcuts.arrow_shooter, "last_arrow_hit")
-	while Shortcuts.hero.dead:
-		yield(Shortcuts.arrow_shooter, "last_arrow_hit")
-	
+	while true:
+		yield(Shortcuts.arrow_shooter, "last_arrow")
+		yield(get_tree().create_timer(2), "timeout")
+		
+		if not Shortcuts.hero.dead:
+			break;
+
 	Shortcuts.superhero_mode.allow_to_turn = false
-	yield(get_tree().create_timer(1), "timeout")
 	_start_next_scenario()
 
 func _start_next_scenario():

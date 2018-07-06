@@ -2,7 +2,7 @@ extends Node2D
 
 signal started_shooting
 signal stopped_shooting
-signal last_arrow_hit
+signal last_arrow
 
 export(bool) var advanced = false
 export(int) var amount = 30
@@ -63,7 +63,7 @@ func _stop_if_out_of_arrows():
 	arrows_left -= 1
 	if arrows_left <= 0:
 		stop_shooting()
-		last_arrow.connect("hit", self, "_emit_last_arrow_hit")
+		last_arrow.connect("got_disabled", self, "_emit_last_arrow")
 
-func _emit_last_arrow_hit():
-	emit_signal("last_arrow_hit")
+func _emit_last_arrow():
+	emit_signal("last_arrow")

@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="ScreenExitNotifier" type="VisibilityEnabler2D"]
+
+rect = Rect2( -10, -10, 20, 20 )
+pause_animations = true
+freeze_bodies = true
+pause_particles = true
+pause_animated_sprites = true
+process_parent = false
+physics_process_parent = false
+
+

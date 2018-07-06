@@ -7,7 +7,7 @@
 [ext_resource path="res://source/mechanics/ScenarioPlayer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/juice/Trail.tscn" type="PackedScene" id=6]
 [ext_resource path="res://source/juice/DeathAnimation.tscn" type="PackedScene" id=7]
-[ext_resource path="res://source/world/Walls.tscn" type="PackedScene" id=8]
+[ext_resource path="res://source/world/scenarios/Scenario1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://source/world/Hero.tscn" type="PackedScene" id=9]
 [ext_resource path="res://source/ui/Instruction.tscn" type="PackedScene" id=10]
 [ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=11]
@@ -57,7 +57,7 @@ _sections_unfolded = [ "Fill", "Transform" ]
 
 [node name="Hero" parent="World" index="1" instance=ExtResource( 9 )]
 
-position = Vector2( 840, 430 )
+position = Vector2( 470, 420 )
 bounce = 0.0
 linear_damp = 1.0
 _sections_unfolded = [ "Collision", "Linear", "Transform" ]
@@ -91,7 +91,7 @@ text = "Press SPACE when ready"
 
 [node name="ThankYouScreen" parent="UI" index="3" instance=ExtResource( 13 )]
 
-[connection signal="last_arrow_hit" from="Mechanics/ArrowShooter" to="Mechanics/SuperheroMode" method="off"]
+[connection signal="last_arrow" from="Mechanics/ArrowShooter" to="Mechanics/SuperheroMode" method="off"]
 
 [connection signal="on" from="Mechanics/SuperheroMode" to="UI/Instruction" method="hide"]
 

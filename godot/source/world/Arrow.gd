@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-signal hit
+signal got_disabled
 
 export(int) var speed = 100
 
@@ -29,7 +29,10 @@ func _process_collision():
 		set_physics_process(false)
 	
 	_disable_hero_collision()
-	emit_signal("hit")
+	_disable()
 
 func _disable_hero_collision():
 	collision_mask = 2
+
+func _disable():
+	emit_signal("got_disabled")

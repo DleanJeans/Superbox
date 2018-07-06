@@ -44,3 +44,7 @@ func _on_JumpTimer_timeout():
 
 func _integrate_forces(state):
 	$IntegrateForces.call(state)
+
+func _physics_process(delta):
+	if position.y > OS.window_size.y:
+		die()
