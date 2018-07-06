@@ -1,5 +1,8 @@
 extends Node
 
+var ScenarioFloorOnly = "res://source/world/levels/ScenarioFloorOnly.tscn"
+var ScenarioWallJump = "res://source/world/levels/ScenarioWallJump.tscn"
+
 var ArrowScene = load("res://source/world/Arrow.tscn")
 
 var game setget , get_game
@@ -22,9 +25,13 @@ var hero setget , get_hero
 func get_hero():
 	return $"/root/Game/World/Hero"
 
-var bottom_wall setget , get_bottom_wall
-func get_bottom_wall():
-	return $"/root/Game/World/Walls/Bottom"
+var level setget , get_level
+func get_level():
+	return $"/root/Game/World/Level"
+
+var level_floor setget , get_level_floor
+func get_level_floor():
+	return $"/root/Game/World/Level/Floor"
 
 var arrow_shooter setget , get_arrow_shooter
 func get_arrow_shooter():
@@ -42,10 +49,18 @@ var restarter setget , get_restarter
 func get_restarter():
 	return $"/root/Game/Mechanics/Restarter"
 
-#var name setget , get_name
-#func get_name():
-#	return $"/root/Game/"
-
 var thank_you_screen setget , get_thanks_screen
 func get_thanks_screen():
 	return $"/root/Game/UI/ThankYouScreen"
+
+var trail setget , get_trail
+func get_trail():
+	return $"/root/Game/Juice/Trail"
+
+var death_animation setget , get_death_animation
+func get_death_animation():
+	return $"/root/Game/Juice/DeathAnimation"
+
+#var name setget , get_name
+#func get_name():
+#	return $"/root/Game/"

@@ -41,8 +41,8 @@ func _integrate_y():
 		me.apply_impulse(Vector2(), jump_vector)
 
 func _limit_velocity_y():
-	if abs(me.linear_velocity.y) > jump_force:
-		state.linear_velocity.y = jump_force * sign(me.linear_velocity.y)
+	if me.linear_velocity.y < -jump_force:
+		state.linear_velocity.y = -jump_force
 
 func _integrate_angular(state):
 	if me.get_colliding_bodies().size() > 0: return

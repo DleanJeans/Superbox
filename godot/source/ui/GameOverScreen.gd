@@ -6,7 +6,8 @@ func show_delayed():
 
 func _restart():
 	hide()
-	get_tree().change_scene("res://source/Game.tscn")
+#	get_tree().reload_current_scene()
+	Shortcuts.restarter.restart()
 
 func _replay():
 	hide()

@@ -7,6 +7,8 @@ export(int) var speed = 100
 var velocity = Vector2()
 var kinematic_collision
 
+var disabled = false
+
 func shoot(target_position):
 	var vector_to_target = target_position - position
 	velocity = vector_to_target.normalized() * speed
@@ -27,12 +29,19 @@ func _process_collision():
 		Shortcuts.hero.hit_by_arrow(self)
 	else:
 		set_physics_process(false)
+		_disable_collision()
 	
 	_disable_hero_collision()
 	_disable()
+
+func _disable_collision():
+	collision_mask = 0
 
 func _disable_hero_collision():
 	collision_mask = 2
 
 func _disable():
+	if disabled: return
+	
+	disabled = true
 	emit_signal("got_disabled")

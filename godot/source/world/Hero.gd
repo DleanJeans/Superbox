@@ -20,6 +20,9 @@ func die():
 	Shortcuts.superhero_mode.off()
 	emit_signal("died")
 
+func revive():
+	dead = false
+
 func move_left():
 	if input_vector.x > 0:
 		input_vector.x = 0

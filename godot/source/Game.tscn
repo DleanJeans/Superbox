@@ -1,18 +1,19 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/mechanics/ArrowShooter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/mechanics/PlayerControl.gd" type="Script" id=3]
 [ext_resource path="res://source/mechanics/SuperheroMode.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/mechanics/ScenarioPlayer.tscn" type="PackedScene" id=5]
-[ext_resource path="res://source/juice/Trail.tscn" type="PackedScene" id=6]
-[ext_resource path="res://source/juice/DeathAnimation.tscn" type="PackedScene" id=7]
-[ext_resource path="res://source/scenarios/ScenarioFloorOnly.tscn" type="PackedScene" id=8]
-[ext_resource path="res://source/world/Hero.tscn" type="PackedScene" id=9]
-[ext_resource path="res://source/ui/Instruction.tscn" type="PackedScene" id=10]
-[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=11]
-[ext_resource path="res://source/ui/ScenarioScreen.tscn" type="PackedScene" id=12]
-[ext_resource path="res://source/ui/ThankYouScreen.tscn" type="PackedScene" id=13]
+[ext_resource path="res://source/mechanics/Restarter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://source/juice/Trail.tscn" type="PackedScene" id=7]
+[ext_resource path="res://source/juice/DeathAnimation.tscn" type="PackedScene" id=8]
+[ext_resource path="res://source/world/levels/ScenarioFloorOnly.tscn" type="PackedScene" id=9]
+[ext_resource path="res://source/world/Hero.tscn" type="PackedScene" id=10]
+[ext_resource path="res://source/ui/Instruction.tscn" type="PackedScene" id=11]
+[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=12]
+[ext_resource path="res://source/ui/ScenarioScreen.tscn" type="PackedScene" id=13]
+[ext_resource path="res://source/ui/ThankYouScreen.tscn" type="PackedScene" id=14]
 
 [node name="Game" type="Node" index="0"]
 
@@ -24,7 +25,6 @@ script = ExtResource( 1 )
 
 position = Vector2( 480, 100 )
 _sections_unfolded = [ "Transform" ]
-advanced = false
 amount = 10
 
 [node name="PlayerControl" type="Node" parent="Mechanics" index="1"]
@@ -40,22 +40,22 @@ allow_to_turn = false
 
 [node name="ScenarioPlayer" parent="Mechanics" index="3" instance=ExtResource( 5 )]
 
+[node name="Restarter" parent="Mechanics" index="4" instance=ExtResource( 6 )]
+
 [node name="Juice" type="Node" parent="." index="1"]
 
-editor/display_folded = true
-
-[node name="Trail" parent="Juice" index="0" instance=ExtResource( 6 )]
+[node name="Trail" parent="Juice" index="0" instance=ExtResource( 7 )]
 
 points = PoolVector2Array( 130, 430 )
 _sections_unfolded = [ "Fill", "Transform" ]
 
-[node name="DeathAnimation" parent="Juice" index="1" instance=ExtResource( 7 )]
+[node name="DeathAnimation" parent="Juice" index="1" instance=ExtResource( 8 )]
 
 [node name="World" type="Node" parent="." index="2"]
 
-[node name="Walls" parent="World" index="0" instance=ExtResource( 8 )]
+[node name="Level" parent="World" index="0" instance=ExtResource( 9 )]
 
-[node name="Hero" parent="World" index="1" instance=ExtResource( 9 )]
+[node name="Hero" parent="World" index="1" instance=ExtResource( 10 )]
 
 position = Vector2( 470, 420 )
 bounce = 0.0
@@ -80,27 +80,31 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Instruction" parent="UI" index="0" instance=ExtResource( 10 )]
+[node name="Instruction" parent="UI" index="0" instance=ExtResource( 11 )]
 
 visible = false
 text = "Press SPACE when ready"
 
-[node name="GameOverScreen" parent="UI" index="1" instance=ExtResource( 11 )]
+[node name="GameOverScreen" parent="UI" index="1" instance=ExtResource( 12 )]
 
-[node name="ScenarioScreen" parent="UI" index="2" instance=ExtResource( 12 )]
+[node name="ScenarioScreen" parent="UI" index="2" instance=ExtResource( 13 )]
 
-[node name="ThankYouScreen" parent="UI" index="3" instance=ExtResource( 13 )]
+[node name="ThankYouScreen" parent="UI" index="3" instance=ExtResource( 14 )]
 
 [connection signal="last_arrow" from="Mechanics/ArrowShooter" to="Mechanics/SuperheroMode" method="off"]
 
 [connection signal="on" from="Mechanics/SuperheroMode" to="UI/Instruction" method="hide"]
 
-[connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show_delayed"]
+[connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Mechanics/Restarter" method="record_hero_initial_position"]
+
+[connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Juice/Trail" method="reset"]
 
 [connection signal="died" from="World/Hero" to="Mechanics/ArrowShooter" method="stop_shooting"]
 
-[connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
+[connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show_delayed"]
 
 [connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/ArrowShooter" method="free_all_arrows"]
+
+[connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
 
 

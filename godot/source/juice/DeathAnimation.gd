@@ -4,6 +4,8 @@ func _ready():
 	Shortcuts.hero.connect("hit_by_arrow", self, "play")
 
 func play(arrow):
+	show()
+	
 	var hero = Shortcuts.hero
 	
 	hero.hide()

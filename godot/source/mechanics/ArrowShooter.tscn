@@ -2,9 +2,10 @@
 
 [ext_resource path="res://source/mechanics/ArrowShooter.gd" type="Script" id=1]
 
-[node name="ArrowShooter" type="Node2D"]
+[node name="ArrowShooter" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+advanced = false
 amount = 50
 interval = 0.1
 
