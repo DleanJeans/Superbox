@@ -1,10 +1,11 @@
 extends Node
 
+const ANGULAR_SPEED = PI * 2
+
 onready var me = get_parent()
 
 var speed
 var jump_force
-var input_vector
 var state
 
 func call(state):
@@ -18,12 +19,11 @@ func call(state):
 	_integrate_angular(state)
 
 func _update_properties():
-	input_vector = me.input_vector
 	jump_force = me.jump_force
 	speed = me.speed
 
 func _integrate_x():
-	var horizontal = input_vector
+	var horizontal = me.input_vector
 	horizontal.y = 0
 	
 	me.apply_impulse(Vector2(), horizontal * speed)
@@ -33,10 +33,12 @@ func _limit_velocity_x():
 		state.linear_velocity.x = speed * sign(me.linear_velocity.x)
 
 func _integrate_y():
-	var vertical = input_vector
+	var vertical = me.input_vector
 	vertical.x = 0
+	var jump_vector = vertical * jump_force
 	
-	me.apply_impulse(Vector2(), vertical * jump_force)
+	if jump_vector != Vector2():
+		me.apply_impulse(Vector2(), jump_vector)
 
 func _limit_velocity_y():
 	if abs(me.linear_velocity.y) > jump_force:
@@ -45,7 +47,6 @@ func _limit_velocity_y():
 func _integrate_angular(state):
 	if me.get_colliding_bodies().size() > 0: return
 	
-	if input_vector.x < 0:
-		state.angular_velocity = -PI * 2
-	elif input_vector.x > 0:
-		state.angular_velocity = PI * 2
+	if me.input_vector.x != 0:
+		var velocity_sign = sign(state.angular_velocity)
+		state.angular_velocity = ANGULAR_SPEED * velocity_sign

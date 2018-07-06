@@ -33,6 +33,8 @@ script = ExtResource( 3 )
 
 [node name="SuperheroMode" parent="Mechanics" index="2" instance=ExtResource( 4 )]
 
+normal_jump_force = 500
+super_jump_force = 500
 in_superhero_mode = false
 allow_to_turn = false
 
@@ -55,12 +57,10 @@ _sections_unfolded = [ "Fill", "Transform" ]
 
 [node name="Hero" parent="World" index="1" instance=ExtResource( 9 )]
 
-position = Vector2( 130, 430 )
+position = Vector2( 840, 430 )
 bounce = 0.0
 linear_damp = 1.0
 _sections_unfolded = [ "Collision", "Linear", "Transform" ]
-
-[node name="HelpScenario" type="Node" parent="World" index="2"]
 
 [node name="UI" type="Control" parent="." index="3"]
 
@@ -95,12 +95,12 @@ text = "Press SPACE when ready"
 
 [connection signal="on" from="Mechanics/SuperheroMode" to="UI/Instruction" method="hide"]
 
-[connection signal="died" from="World/Hero" to="Mechanics/ArrowShooter" method="stop_shooting"]
-
 [connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show_delayed"]
 
-[connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/ArrowShooter" method="free_all_arrows"]
+[connection signal="died" from="World/Hero" to="Mechanics/ArrowShooter" method="stop_shooting"]
 
 [connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
+
+[connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/ArrowShooter" method="free_all_arrows"]
 
 
