@@ -2,7 +2,7 @@ extends Node
 
 signal new_level_loaded
 
-var scenario_files = ["Arrows", "WallJump", "MoreArrows", "AI"]
+var scenario_files = ["Arrows", "WallJump", "MoreArrows", "AI", "WallJumpAI"]
 var scenarios = []
 
 var screen setget , get_screen
