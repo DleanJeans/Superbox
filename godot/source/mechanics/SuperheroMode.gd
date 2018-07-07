@@ -22,7 +22,6 @@ func on():
 	self.in_superhero_mode = true
 	hero.speed = super_speed
 	hero.jump_force = super_speed
-	Engine.time_scale = super_time_scale
 	
 	emit_signal("on")
 
@@ -32,6 +31,5 @@ func off():
 	self.in_superhero_mode = false
 	hero.speed = normal_speed
 	hero.jump_force = normal_jump_force
-	Engine.time_scale = 1
 	
 	emit_signal("off")

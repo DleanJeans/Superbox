@@ -2,6 +2,7 @@ extends Control
 
 export(float) var wait_duration = 1.5
 
+signal started_scrolling_down
 signal scrolled_down
 signal scrolled_up
 
@@ -16,6 +17,7 @@ func scroll():
 	$Timer.start()
 
 func _scroll_down():
+	emit_signal("started_scrolling_down")
 	$AnimationPlayer.play("ScrollDown")
 	get_tree().paused = true
 	yield($AnimationPlayer, "animation_finished")

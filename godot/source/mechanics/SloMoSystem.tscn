@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://source/mechanics/SloMoSystem.gd" type="Script" id=1]
+
+[node name="SloMoSystem" type="Node"]
+
+script = ExtResource( 1 )
+slo_mo_time_scale = 0.2
+
+

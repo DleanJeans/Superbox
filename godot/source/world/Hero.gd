@@ -16,8 +16,9 @@ func hit_by_arrow(arrow):
 	emit_signal("hit_by_arrow", arrow)
 
 func die():
+	if dead: return
+	
 	dead = true
-	Shortcuts.superhero_mode.off()
 	emit_signal("died")
 
 func revive():
