@@ -3,6 +3,8 @@ extends Control
 func show():
 	yield(get_tree().create_timer(0.25), "timeout")
 	.show()
+	$Sound.play()
+#	Shortcuts.hero.get_node("DeathSound").stop()
 
 func _restart():
 	hide()

@@ -4,7 +4,7 @@
 [ext_resource path="res://resources/FowardFont100.tres" type="DynamicFont" id=2]
 [ext_resource path="res://resources/FowardFont50.tres" type="DynamicFont" id=3]
 
-[node name="TitleScreen" type="Control" index="0"]
+[node name="TitleScreen" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0

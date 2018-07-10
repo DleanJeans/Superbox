@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 Shortcuts="*res://source/Shortcuts.gd"
 Replayer="*res://source/mechanics/Replayer.gd"
 GameData="*res://source/GameData.gd"
+Music="*res://source/Music.tscn"
 
 [display]
 

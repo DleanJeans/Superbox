@@ -8,6 +8,7 @@ var velocity = Vector2()
 var kinematic_collision
 
 var disabled = false
+var flew_by = false
 
 func shoot(target_position):
 	var vector_to_target = target_position - position
@@ -45,3 +46,12 @@ func _disable():
 	
 	disabled = true
 	emit_signal("got_disabled")
+
+func _on_SoundArea_body_entered(body):
+	$HitSound.play()
+
+func _on_FlybySoundArea_body_entered(body):
+	if flew_by: return
+	
+	flew_by = true
+	$FlybySound.play()

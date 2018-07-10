@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://source/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/mechanics/ArrowShooter.tscn" type="PackedScene" id=2]
@@ -16,8 +16,17 @@
 [ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=14]
 [ext_resource path="res://source/ui/ScenarioScreen.tscn" type="PackedScene" id=15]
 [ext_resource path="res://source/ui/ThankYouScreen.tscn" type="PackedScene" id=16]
+[ext_resource path="res://source/Sounds.gd" type="Script" id=17]
+[ext_resource path="res://assets/sfx/transition.wav" type="AudioStream" id=18]
+[ext_resource path="res://assets/sfx/countdown.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/sfx/start.wav" type="AudioStream" id=20]
 
-[node name="Game" type="Node" index="0"]
+[sub_resource type="AudioStreamRandomPitch" id=1]
+
+audio_stream = ExtResource( 18 )
+random_pitch = 1.25
+
+[node name="Game" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -45,7 +54,7 @@ allow_to_turn = false
 
 [node name="Restarter" parent="Mechanics" index="4" instance=ExtResource( 6 )]
 
-[node name="SloMoSystem" parent="Mechanics" index="5" instance=ExtResource( 7 )]
+[node name="SloMo" parent="Mechanics" index="5" instance=ExtResource( 7 )]
 
 [node name="Countdown" parent="Mechanics" index="6" instance=ExtResource( 8 )]
 
@@ -100,32 +109,63 @@ _sections_unfolded = [ "Pause", "Rect", "Visibility" ]
 
 [node name="ThankYouScreen" parent="UI" index="3" instance=ExtResource( 16 )]
 
+[node name="Sounds" type="Node" parent="." index="4"]
+
+script = ExtResource( 17 )
+
+[node name="TransitionSound" type="AudioStreamPlayer" parent="Sounds" index="0"]
+
+stream = SubResource( 1 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="Countdown" type="AudioStreamPlayer" parent="Sounds" index="1"]
+
+stream = ExtResource( 19 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="Start" type="AudioStreamPlayer" parent="Sounds" index="2"]
+
+stream = ExtResource( 20 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
 [connection signal="last_arrow" from="Mechanics/ArrowShooter" to="Mechanics/SuperheroMode" method="off"]
 
-[connection signal="off" from="Mechanics/SuperheroMode" to="Mechanics/SloMoSystem" method="off"]
-
-[connection signal="on" from="Mechanics/SuperheroMode" to="Mechanics/Countdown" method="stop"]
-
-[connection signal="on" from="Mechanics/SuperheroMode" to="Mechanics/SloMoSystem" method="on"]
+[connection signal="off" from="Mechanics/SuperheroMode" to="Mechanics/SloMo" method="off"]
 
 [connection signal="on" from="Mechanics/SuperheroMode" to="UI/Instruction" method="hide"]
 
-[connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Juice/Trail" method="reset"]
+[connection signal="on" from="Mechanics/SuperheroMode" to="Mechanics/SloMo" method="on"]
+
+[connection signal="on" from="Mechanics/SuperheroMode" to="Mechanics/Countdown" method="stop"]
 
 [connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Mechanics/Restarter" method="record_hero_initial_position"]
+
+[connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Juice/Trail" method="reset"]
 
 [connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show"]
 
 [connection signal="died" from="World/Hero" to="Mechanics/ArrowShooter" method="stop_shooting"]
 
-[connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/ArrowShooter" method="free_all_arrows"]
+[connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
 
 [connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/Countdown" method="start"]
 
-[connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
+[connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/ArrowShooter" method="free_all_arrows"]
 
 [connection signal="scrolled_up" from="UI/ScenarioScreen" to="Mechanics/SuperheroMode" method="off"]
 
-[connection signal="started_scrolling_down" from="UI/ScenarioScreen" to="Mechanics/SloMoSystem" method="off"]
+[connection signal="started_scrolling_down" from="UI/ScenarioScreen" to="Mechanics/SloMo" method="off"]
 
 

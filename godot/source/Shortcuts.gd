@@ -61,6 +61,14 @@ var death_animation setget , get_death_animation
 func get_death_animation():
 	return $"/root/Game/Juice/DeathAnimation"
 
+var transition_sound setget , get_transition_sound
+func get_transition_sound():
+	return $"/root/Game/Sounds/TransitionSound"
+
+var slo_mo setget , get_slo_mo
+func get_slo_mo():
+	return $"/root/Game/Mechanics/SloMo"
+
 #var name setget , get_name
 #func get_name():
 #	return $"/root/Game/"

@@ -17,14 +17,19 @@ func scroll():
 	$Timer.start()
 
 func _scroll_down():
+	Shortcuts.transition_sound.play()
+	
 	emit_signal("started_scrolling_down")
 	$AnimationPlayer.play("ScrollDown")
 	get_tree().paused = true
+	
 	yield($AnimationPlayer, "animation_finished")
 	emit_signal("scrolled_down")
 
 func _scroll_up():
+	Shortcuts.transition_sound.play()
 	$AnimationPlayer.play_backwards("ScrollDown")
+	
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().paused = false
 	emit_signal("scrolled_up")

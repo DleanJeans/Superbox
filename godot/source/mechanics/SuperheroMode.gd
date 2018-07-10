@@ -8,7 +8,6 @@ export(int) var super_speed = 500
 
 export(int) var normal_jump_force = 800
 export(int) var super_jump_force = 1500
-export(float) var super_time_scale = 0.2
 
 export(bool) var in_superhero_mode = false
 

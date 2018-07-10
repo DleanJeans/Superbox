@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 signal died
+signal revived
 signal hit_by_arrow(arrow)
 
 export(int) var speed = 100
@@ -23,6 +24,8 @@ func die():
 
 func revive():
 	dead = false
+	
+	emit_signal("revived")
 
 func move_left():
 	if input_vector.x > 0:

@@ -1,16 +1,38 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://source/world/Arrow.gd" type="Script" id=1]
 [ext_resource path="res://assets/square.png" type="Texture" id=2]
 [ext_resource path="res://assets/triangle.png" type="Texture" id=3]
 [ext_resource path="res://source/mechanics/ScreenExitNotifier.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sfx/slomo-arrow-hit.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sfx/slomo-arrow-fly-by.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 2, 2 )
 
-[node name="Arrow" type="KinematicBody2D" index="0" groups=[
+[sub_resource type="AudioStreamRandomPitch" id=2]
+
+audio_stream = ExtResource( 5 )
+random_pitch = 1.1
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="AudioStreamRandomPitch" id=4]
+
+audio_stream = ExtResource( 6 )
+random_pitch = 1.1
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 95 )
+
+[node name="Arrow" type="KinematicBody2D" groups=[
 "Arrows",
 ]]
 
@@ -25,6 +47,7 @@ speed = 2000
 
 [node name="Sprites" type="Node2D" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( -0.169684, 0.0565624 )
 
 [node name="Shaft" type="Sprite" parent="Sprites" index="0"]
@@ -70,6 +93,69 @@ shape = SubResource( 1 )
 position = Vector2( -30, 0 )
 scale = Vector2( 3, 1 )
 
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = SubResource( 2 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="HitSoundArea" type="Area2D" parent="." index="4"]
+
+position = Vector2( -10, 0 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="Shape" type="CollisionShape2D" parent="HitSoundArea" index="0"]
+
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="FlybySound" type="AudioStreamPlayer2D" parent="." index="5"]
+
+stream = SubResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="FlybySoundArea" type="Area2D" parent="." index="6"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="Shape" type="CollisionShape2D" parent="FlybySoundArea" index="0"]
+
+shape = SubResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
 [connection signal="screen_exited" from="ScreenExitNotifier" to="." method="_disable"]
+
+[connection signal="body_entered" from="HitSoundArea" to="." method="_on_SoundArea_body_entered"]
+
+[connection signal="body_entered" from="FlybySoundArea" to="." method="_on_FlybySoundArea_body_entered"]
 
 
