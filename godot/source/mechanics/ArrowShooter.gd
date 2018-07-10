@@ -3,6 +3,7 @@ extends Node2D
 signal started_shooting
 signal stopped_shooting
 signal last_arrow
+signal shot_arrow
 
 export(bool) var advanced = false
 export(int) var amount = 30
@@ -42,6 +43,8 @@ func _shoot_arrow():
 	last_arrow.position = position
 	last_arrow.shoot(target_position)
 	last_arrow.update_rotation()
+	
+	emit_signal("shot_arrow")
 
 func compute_target_position(arrow):
 	var hero = Shortcuts.hero
@@ -67,3 +70,12 @@ func _stop_if_out_of_arrows():
 
 func _emit_last_arrow():
 	emit_signal("last_arrow")
+
+func _update_and_show_arrow_counter():
+	_update_arrow_counter()
+	$ArrowCounter.show()
+
+func _update_arrow_counter():
+	$ArrowCounter.text = str(arrows_left)
+	if arrows_left == 0:
+		$ArrowCounter.hide()

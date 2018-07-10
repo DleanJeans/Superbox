@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/mechanics/ArrowShooter.gd" type="Script" id=1]
+[ext_resource path="res://resources/FowardFont20.tres" type="DynamicFont" id=2]
 
-[node name="ArrowShooter" type="Node2D" index="0"]
+[node name="ArrowShooter" type="Node2D"]
 
 script = ExtResource( 1 )
 advanced = false
@@ -16,8 +17,38 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
-[connection signal="timeout" from="Timer" to="." method="_shoot_arrow"]
+[node name="ArrowCounter" type="Label" parent="." index="1"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -20.0
+margin_top = -10.0
+margin_right = 20.0
+margin_bottom = 18.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "0"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[connection signal="shot_arrow" from="." to="." method="_update_arrow_counter"]
+
+[connection signal="started_shooting" from="." to="." method="_update_and_show_arrow_counter"]
 
 [connection signal="timeout" from="Timer" to="." method="_stop_if_out_of_arrows"]
+
+[connection signal="timeout" from="Timer" to="." method="_shoot_arrow"]
 
 

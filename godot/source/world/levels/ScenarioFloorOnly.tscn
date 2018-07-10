@@ -17,6 +17,8 @@ scale = Vector2( 4, 0.1 )
 "ScenarioScenes",
 ] instance=ExtResource( 2 )]
 
+position = Vector2( 480, 30 )
+
 [node name="HeroPosition" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 480, 440 )
