@@ -17,6 +17,7 @@ func scroll():
 	$Timer.start()
 
 func _scroll_down():
+	show()
 	Shortcuts.transition_sound.play()
 	
 	emit_signal("started_scrolling_down")
@@ -33,6 +34,7 @@ func _scroll_up():
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().paused = false
 	emit_signal("scrolled_up")
+	hide()
 
 func _process(delta):
 	if not $Timer.is_stopped() \
