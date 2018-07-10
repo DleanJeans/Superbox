@@ -40,9 +40,7 @@ func _play_current_scenario():
 
 func _end_if_hero_survives():
 	while true:
-		print("Scenario %s: Waiting for the last arrow" % (GameData.scenario + 1))
 		yield(Shortcuts.arrow_shooter, "last_arrow")
-		print("Scenario %s: Waiting for 2 sec after the last arrow" % (GameData.scenario + 1))
 		yield(get_tree().create_timer(2), "timeout")
 		
 		if not Shortcuts.hero.dead:
