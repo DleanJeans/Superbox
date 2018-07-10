@@ -14,7 +14,7 @@ control = false
 meta = false
 command = false
 pressed = true
-scancode = 82
+scancode = 32
 unicode = 0
 echo = false
 
