@@ -5,28 +5,23 @@
 [ext_resource path="res://source/world/levels/ArrowShooterPosition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/world/levels/AntiCheater.gd" type="Script" id=4]
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" index="0"]
 
 [node name="Wall" parent="." index="0" instance=ExtResource( 1 )]
 
-position = Vector2( 433.2, 268 )
+position = Vector2( 480, 270 )
 scale = Vector2( 0.1, 4 )
 
-[node name="Floor" parent="." index="1" instance=ExtResource( 1 )]
+[node name="HeroPosition" parent="." index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 478.2, 468 )
-scale = Vector2( 1, 0.1 )
-
-[node name="HeroPosition" parent="." index="2" instance=ExtResource( 2 )]
-
-position = Vector2( 480, 438 )
+position = Vector2( 545, 105 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="ArrowShooterPosition" parent="." index="3" instance=ExtResource( 3 )]
+[node name="ArrowShooterPosition" parent="." index="2" instance=ExtResource( 3 )]
 
-position = Vector2( 740, 250 )
+position = Vector2( 740, 10 )
 
-[node name="AntiCheater" type="Node" parent="." index="4"]
+[node name="AntiCheater" type="Node" parent="." index="3"]
 
 script = ExtResource( 4 )
 

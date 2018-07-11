@@ -14,7 +14,7 @@ func call():
 	_get_colliders()
 	if not _is_touching_walls(): return
 	
-	_get_wall_prioritizing_floor()
+	_get_wall()
 	_get_wall_normal_from_test_motion()
 	_process_wall_normal()
 	_set_input_vector()
@@ -26,10 +26,8 @@ func _get_colliders():
 func _is_touching_walls():
 	return colliders.size() > 0 and colliders[0] is StaticBody2D
 
-func _get_wall_prioritizing_floor():
-	if colliders.has(Shortcuts.level_floor):
-		_colliding_wall = Shortcuts.level_floor
-	else: _colliding_wall = colliders[0]
+func _get_wall():
+	_colliding_wall = colliders[0]
 
 func _get_wall_normal_from_test_motion():
 	var vector_to_touched_wall = _colliding_wall.position - me.position
