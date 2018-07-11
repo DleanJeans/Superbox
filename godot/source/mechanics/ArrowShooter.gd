@@ -13,8 +13,6 @@ var arrows_left
 var last_arrow
 
 func _ready():
-	Replayer.connect("started_replaying", self, "free_all_arrows")
-	Replayer.connect_arrow_shooter()
 	connect_superhero_mode()
 
 func connect_superhero_mode():
