@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://source/mechanics/ArrowShooter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/mechanics/PlayerControl.gd" type="Script" id=2]
@@ -16,14 +16,15 @@
 [ext_resource path="res://source/ui/ScenarioScreen.tscn" type="PackedScene" id=14]
 [ext_resource path="res://source/ui/ThankYouScreen.tscn" type="PackedScene" id=15]
 [ext_resource path="res://source/ui/ArrowCounter.tscn" type="PackedScene" id=16]
-[ext_resource path="res://source/Sounds.gd" type="Script" id=17]
-[ext_resource path="res://assets/sfx/transition.wav" type="AudioStream" id=18]
-[ext_resource path="res://assets/sfx/countdown.wav" type="AudioStream" id=19]
-[ext_resource path="res://assets/sfx/start.wav" type="AudioStream" id=20]
+[ext_resource path="res://source/ui/PauseScene.tscn" type="PackedScene" id=17]
+[ext_resource path="res://source/Sounds.gd" type="Script" id=18]
+[ext_resource path="res://assets/sfx/transition.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/sfx/countdown.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/sfx/start.wav" type="AudioStream" id=21]
 
 [sub_resource type="AudioStreamRandomPitch" id=1]
 
-audio_stream = ExtResource( 18 )
+audio_stream = ExtResource( 19 )
 random_pitch = 1.25
 
 [node name="Game" type="Node"]
@@ -127,9 +128,11 @@ _sections_unfolded = [ "Pause", "Rect", "Visibility" ]
 
 [node name="ArrowCounter" parent="UI" index="4" instance=ExtResource( 16 )]
 
+[node name="PauseScene" parent="UI" index="5" instance=ExtResource( 17 )]
+
 [node name="Sounds" type="Node" parent="." index="4"]
 
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 
 [node name="TransitionSound" type="AudioStreamPlayer" parent="Sounds" index="0"]
 
@@ -142,7 +145,7 @@ bus = "Master"
 
 [node name="Countdown" type="AudioStreamPlayer" parent="Sounds" index="1"]
 
-stream = ExtResource( 19 )
+stream = ExtResource( 20 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
@@ -151,7 +154,7 @@ bus = "Master"
 
 [node name="Start" type="AudioStreamPlayer" parent="Sounds" index="2"]
 
-stream = ExtResource( 20 )
+stream = ExtResource( 21 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
@@ -174,9 +177,9 @@ bus = "Master"
 
 [connection signal="on" from="Mechanics/SuperheroMode" to="UI/Instruction" method="hide"]
 
-[connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Mechanics/Restarter" method="record_hero_initial_position"]
-
 [connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Juice/Trail" method="reset"]
+
+[connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Mechanics/Restarter" method="record_hero_initial_position"]
 
 [connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show"]
 
