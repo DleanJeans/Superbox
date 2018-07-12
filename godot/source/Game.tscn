@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://source/mechanics/ArrowShooter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/mechanics/PlayerControl.gd" type="Script" id=2]
@@ -7,26 +7,27 @@
 [ext_resource path="res://source/mechanics/Restarter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/mechanics/SloMoSystem.tscn" type="PackedScene" id=6]
 [ext_resource path="res://source/mechanics/Countdown.tscn" type="PackedScene" id=7]
-[ext_resource path="res://source/juice/Trail.tscn" type="PackedScene" id=8]
-[ext_resource path="res://source/juice/DeathAnimation.tscn" type="PackedScene" id=9]
-[ext_resource path="res://source/world/levels/ScenarioFloorOnly.tscn" type="PackedScene" id=10]
-[ext_resource path="res://source/world/Hero.tscn" type="PackedScene" id=11]
-[ext_resource path="res://source/ui/Instruction.tscn" type="PackedScene" id=12]
-[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=13]
-[ext_resource path="res://source/ui/ScenarioScreen.tscn" type="PackedScene" id=14]
-[ext_resource path="res://source/ui/ThankYouScreen.tscn" type="PackedScene" id=15]
-[ext_resource path="res://source/ui/PauseScene.tscn" type="PackedScene" id=16]
-[ext_resource path="res://source/Sounds.gd" type="Script" id=17]
-[ext_resource path="res://assets/sfx/transition.wav" type="AudioStream" id=18]
-[ext_resource path="res://assets/sfx/countdown.wav" type="AudioStream" id=19]
-[ext_resource path="res://assets/sfx/start.wav" type="AudioStream" id=20]
+[ext_resource path="res://source/mechanics/PauseSloMo.tscn" type="PackedScene" id=8]
+[ext_resource path="res://source/juice/Trail.tscn" type="PackedScene" id=9]
+[ext_resource path="res://source/juice/DeathAnimation.tscn" type="PackedScene" id=10]
+[ext_resource path="res://source/world/levels/ScenarioFloorOnly.tscn" type="PackedScene" id=11]
+[ext_resource path="res://source/world/Hero.tscn" type="PackedScene" id=12]
+[ext_resource path="res://source/ui/Instruction.tscn" type="PackedScene" id=13]
+[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=14]
+[ext_resource path="res://source/ui/ScenarioScreen.tscn" type="PackedScene" id=15]
+[ext_resource path="res://source/ui/ThankYouScreen.tscn" type="PackedScene" id=16]
+[ext_resource path="res://source/ui/PauseScene.tscn" type="PackedScene" id=17]
+[ext_resource path="res://source/Sounds.gd" type="Script" id=18]
+[ext_resource path="res://assets/sfx/transition.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/sfx/countdown.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/sfx/start.wav" type="AudioStream" id=21]
 
 [sub_resource type="AudioStreamRandomPitch" id=1]
 
-audio_stream = ExtResource( 18 )
+audio_stream = ExtResource( 19 )
 random_pitch = 1.25
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" index="0"]
 
 [node name="Mechanics" type="Node" parent="." index="0"]
 
@@ -56,21 +57,24 @@ allow_to_turn = false
 
 [node name="Countdown" parent="Mechanics" index="6" instance=ExtResource( 7 )]
 
+[node name="PauseSloMo" parent="Mechanics" index="7" instance=ExtResource( 8 )]
+
 [node name="Juice" type="Node" parent="." index="1"]
 
-[node name="Trail" parent="Juice" index="0" instance=ExtResource( 8 )]
+[node name="Trail" parent="Juice" index="0" instance=ExtResource( 9 )]
 
 points = PoolVector2Array( 130, 430 )
 _sections_unfolded = [ "Fill", "Transform" ]
 
-[node name="DeathAnimation" parent="Juice" index="1" instance=ExtResource( 9 )]
+[node name="DeathAnimation" parent="Juice" index="1" instance=ExtResource( 10 )]
 
 [node name="World" type="Node" parent="." index="2"]
 
-[node name="Level" parent="World" index="0" instance=ExtResource( 10 )]
+[node name="Level" parent="World" index="0" instance=ExtResource( 11 )]
 
-[node name="Hero" parent="World" index="1" instance=ExtResource( 11 )]
+[node name="Hero" parent="World" index="1" instance=ExtResource( 12 )]
 
+editor/display_folded = true
 position = Vector2( 470, 420 )
 bounce = 0.0
 linear_damp = 1.0
@@ -112,24 +116,24 @@ scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 _sections_unfolded = [ "Pause" ]
 
-[node name="Instruction" parent="UI" index="0" instance=ExtResource( 12 )]
+[node name="Instruction" parent="UI" index="0" instance=ExtResource( 13 )]
 
 visible = false
 text = "Press SPACE when ready"
 
-[node name="GameOverScreen" parent="UI" index="1" instance=ExtResource( 13 )]
+[node name="GameOverScreen" parent="UI" index="1" instance=ExtResource( 14 )]
 
 _sections_unfolded = [ "Pause", "Rect", "Visibility" ]
 
-[node name="ScenarioScreen" parent="UI" index="2" instance=ExtResource( 14 )]
+[node name="ScenarioScreen" parent="UI" index="2" instance=ExtResource( 15 )]
 
-[node name="ThankYouScreen" parent="UI" index="3" instance=ExtResource( 15 )]
+[node name="ThankYouScreen" parent="UI" index="3" instance=ExtResource( 16 )]
 
-[node name="PauseScene" parent="UI" index="4" instance=ExtResource( 16 )]
+[node name="PauseScene" parent="UI" index="4" instance=ExtResource( 17 )]
 
 [node name="Sounds" type="Node" parent="." index="4"]
 
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 
 [node name="TransitionSound" type="AudioStreamPlayer" parent="Sounds" index="0"]
 
@@ -142,7 +146,7 @@ bus = "Master"
 
 [node name="Countdown" type="AudioStreamPlayer" parent="Sounds" index="1"]
 
-stream = ExtResource( 19 )
+stream = ExtResource( 20 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
@@ -151,7 +155,7 @@ bus = "Master"
 
 [node name="Start" type="AudioStreamPlayer" parent="Sounds" index="2"]
 
-stream = ExtResource( 20 )
+stream = ExtResource( 21 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
@@ -162,9 +166,9 @@ bus = "Master"
 
 [connection signal="off" from="Mechanics/SuperheroMode" to="Mechanics/SloMo" method="off"]
 
-[connection signal="on" from="Mechanics/SuperheroMode" to="Mechanics/Countdown" method="stop"]
-
 [connection signal="on" from="Mechanics/SuperheroMode" to="UI/Instruction" method="hide"]
+
+[connection signal="on" from="Mechanics/SuperheroMode" to="Mechanics/Countdown" method="stop"]
 
 [connection signal="on" from="Mechanics/SuperheroMode" to="Mechanics/SloMo" method="on"]
 
@@ -176,14 +180,18 @@ bus = "Master"
 
 [connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show"]
 
-[connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/Countdown" method="start"]
+[connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
 
 [connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/ArrowShooter" method="free_all_arrows"]
 
-[connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
+[connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/Countdown" method="start"]
 
 [connection signal="scrolled_up" from="UI/ScenarioScreen" to="Mechanics/SuperheroMode" method="off"]
 
 [connection signal="started_scrolling_down" from="UI/ScenarioScreen" to="Mechanics/SloMo" method="off"]
+
+[connection signal="paused" from="UI/PauseScene" to="Sounds" method="mute"]
+
+[connection signal="unpaused" from="UI/PauseScene" to="Sounds" method="unmute"]
 
 

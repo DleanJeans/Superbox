@@ -69,6 +69,14 @@ var slo_mo setget , get_slo_mo
 func get_slo_mo():
 	return $"/root/Game/Mechanics/SloMo"
 
+var pause_scene setget , get_pause_scene
+func get_pause_scene():
+	return $"/root/Game/UI/PauseScene"
+
+var pause_slo_mo setget , get_pause_slo_mo
+func get_pause_slo_mo():
+	return $"/root/Game/Mechanics/PauseSloMo"
+
 #var name setget , get_name
 #func get_name():
 #	return $"/root/Game/"

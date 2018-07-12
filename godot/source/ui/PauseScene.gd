@@ -1,5 +1,8 @@
 extends Container
 
+signal paused
+signal unpaused
+
 func pause():
 	if game_is_paused():
 		return
@@ -7,6 +10,8 @@ func pause():
 	show()
 	$AnimationPlayer.play("Pause")
 	get_tree().paused = true
+	
+	emit_signal("paused")
 
 func unpause():
 	if not game_is_paused():
@@ -16,13 +21,17 @@ func unpause():
 	get_tree().paused = false
 	yield($AnimationPlayer, "animation_finished")
 	hide()
+	
+	emit_signal("unpaused")
 
 func game_is_paused():
 	return get_tree().paused
 
 func _process(delta):
-	if not game_is_paused() and Input.is_action_just_pressed("ui_cancel"):
-		pause()
+	if Input.is_action_just_pressed("ui_cancel"):
+		if game_is_paused():
+			unpause()
+		else: pause()
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
