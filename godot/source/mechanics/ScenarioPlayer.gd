@@ -39,12 +39,16 @@ func _play_current_scenario():
 	yield(_end_if_hero_survives(), "completed")
 
 func _end_if_hero_survives():
+	var current_attempt
+	
 	while true:
+		current_attempt = GameData.attempts
 		yield(Shortcuts.arrow_shooter, "last_arrow")
 		yield(get_tree().create_timer(2), "timeout")
 		
-		if not Shortcuts.hero.dead:
-			break;
+		if current_attempt == GameData.attempts \
+		and not Shortcuts.hero.dead:
+			break
 	
 	Shortcuts.superhero_mode.allow_to_turn = false
 
