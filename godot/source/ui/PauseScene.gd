@@ -21,7 +21,7 @@ func game_is_paused():
 	return get_tree().paused
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
+	if not game_is_paused() and Input.is_action_just_pressed("ui_cancel"):
 		pause()
 
 func _gui_input(event):
