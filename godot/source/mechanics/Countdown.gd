@@ -1,4 +1,4 @@
-extends Node
+extends CanvasLayer
 
 export(float) var time = 3
 
