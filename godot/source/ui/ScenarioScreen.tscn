@@ -1,13 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/ui/ScenarioScreen.gd" type="Script" id=1]
 [ext_resource path="res://resources/FowardFont100.tres" type="DynamicFont" id=2]
 [ext_resource path="res://resources/FowardFont50.tres" type="DynamicFont" id=3]
-[ext_resource path="res://source/ui/Instruction.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/FFF_Foward.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://source/ui/Instruction.tscn" type="PackedScene" id=5]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="DynamicFont" id=1]
 
-resource_name = "ScrollDown"
+size = 40
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
+
+[sub_resource type="Animation" id=2]
+
 length = 0.5
 loop = false
 step = 0.1
@@ -24,7 +32,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -540 ), Vector2( 0, 50 ), Vector2( 0, 0 ) ]
 }
 
-[node name="ScenarioScreen" type="Control" index="0"]
+[node name="ScenarioScreen" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -61,8 +69,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-margin_top = 110.0
-margin_bottom = 278.0
+margin_top = 60.0
+margin_bottom = 228.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -84,8 +92,8 @@ anchor_left = 0.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = 30.0
-margin_bottom = 100.0
+margin_top = -20.0
+margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -101,26 +109,53 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="Attempt" type="Label" parent="." index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 70.0
+margin_bottom = 140.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "Attempt 1"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 
 root_node = NodePath("..")
 autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/ScrollDown = SubResource( 1 )
+anims/ScrollDown = SubResource( 2 )
 blend_times = [  ]
 
-[node name="Timer" type="Timer" parent="." index="4"]
+[node name="Timer" type="Timer" parent="." index="5"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = true
 autostart = false
 
-[node name="Instruction" parent="." index="5" instance=ExtResource( 4 )]
+[node name="Instruction" parent="." index="6" instance=ExtResource( 5 )]
 
 text = "CLICK or SPACE to skip"
+
+[connection signal="scrolled_up" from="." to="." method="_on_scrolled_up"]
+
+[connection signal="started_scrolling_down" from="." to="." method="_on_started_scrolling_down"]
 
 [connection signal="timeout" from="Timer" to="." method="_scroll_up"]
 

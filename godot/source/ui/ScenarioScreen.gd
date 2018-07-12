@@ -21,10 +21,9 @@ func _scroll_down():
 	Shortcuts.transition_sound.play()
 	
 	emit_signal("started_scrolling_down")
-	$AnimationPlayer.play("ScrollDown")
-	get_tree().paused = true
 	
 	yield($AnimationPlayer, "animation_finished")
+	
 	emit_signal("scrolled_down")
 
 func _scroll_up():
@@ -32,8 +31,18 @@ func _scroll_up():
 	$AnimationPlayer.play_backwards("ScrollDown")
 	
 	yield($AnimationPlayer, "animation_finished")
-	get_tree().paused = false
 	emit_signal("scrolled_up")
+
+func _on_started_scrolling_down():
+	$AnimationPlayer.play("ScrollDown")
+	get_tree().paused = true
+	_update_attempt()
+
+func _update_attempt():
+	$Attempt.text = "Attempt %s" % GameData.attempts
+
+func _on_scrolled_up():
+	get_tree().paused = false
 	hide()
 
 func _process(delta):
