@@ -3,7 +3,7 @@
 [ext_resource path="res://resources/FowardFont20.tres" type="DynamicFont" id=1]
 [ext_resource path="res://source/ui/ArrowCounter.gd" type="Script" id=2]
 
-[node name="ArrowCounter" type="Label"]
+[node name="ArrowCounter" type="Label" index="0"]
 
 visible = false
 anchor_left = 0.0
