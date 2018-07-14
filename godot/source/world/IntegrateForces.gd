@@ -17,6 +17,11 @@ func call(state):
 	_integrate_y()
 	_limit_velocity_y()
 	_integrate_angular(state)
+	_reset_velocity_if_dead()
+
+func _reset_velocity_if_dead():
+	if me.dead:
+		state.linear_velocity = Vector2()
 
 func _update_properties():
 	jump_force = me.jump_force

@@ -13,7 +13,6 @@ func restart():
 	
 	var hero = Shortcuts.hero
 	hero.position = hero_initial_position
-	hero.linear_velocity = Vector2()
 	hero.rotation = 0
 	hero.mode = RigidBody2D.MODE_RIGID
 	hero.show()
