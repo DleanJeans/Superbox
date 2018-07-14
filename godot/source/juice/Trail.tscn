@@ -7,7 +7,7 @@
 offsets = PoolRealArray( 0, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.75 )
 
-[node name="Trail" type="Line2D" index="0"]
+[node name="Trail" type="Line2D"]
 
 points = PoolVector2Array(  )
 width = 20.0
@@ -21,15 +21,8 @@ sharp_limit = 2.0
 round_precision = 8
 script = ExtResource( 1 )
 _sections_unfolded = [ "Fill" ]
-length = 30
-
-[node name="Timer" type="Timer" parent="." index="0"]
-
-process_mode = 0
-wait_time = 0.02
-one_shot = false
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_add_point_at_current_position"]
+parent = NodePath("Null")
+length = 50
+paused = null
 
 

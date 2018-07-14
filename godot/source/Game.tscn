@@ -65,6 +65,8 @@ allow_to_turn = false
 
 points = PoolVector2Array( 130, 430 )
 _sections_unfolded = [ "Fill", "Transform" ]
+parent = NodePath("../../World/Hero")
+paused = null
 
 [node name="DeathAnimation" parent="Juice" index="1" instance=ExtResource( 10 )]
 
@@ -166,25 +168,25 @@ bus = "Master"
 
 [connection signal="off" from="Mechanics/SuperheroMode" to="Mechanics/SloMo" method="off"]
 
-[connection signal="on" from="Mechanics/SuperheroMode" to="UI/Instruction" method="hide"]
-
 [connection signal="on" from="Mechanics/SuperheroMode" to="Mechanics/Countdown" method="stop"]
 
 [connection signal="on" from="Mechanics/SuperheroMode" to="Mechanics/SloMo" method="on"]
+
+[connection signal="on" from="Mechanics/SuperheroMode" to="UI/Instruction" method="hide"]
 
 [connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Juice/Trail" method="reset"]
 
 [connection signal="new_level_loaded" from="Mechanics/ScenarioPlayer" to="Mechanics/Restarter" method="record_hero_initial_position"]
 
-[connection signal="died" from="World/Hero" to="Mechanics/ArrowShooter" method="stop_shooting"]
-
 [connection signal="died" from="World/Hero" to="UI/GameOverScreen" method="show"]
 
-[connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
+[connection signal="died" from="World/Hero" to="Mechanics/ArrowShooter" method="stop_shooting"]
 
 [connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/ArrowShooter" method="free_all_arrows"]
 
 [connection signal="scrolled_down" from="UI/ScenarioScreen" to="Mechanics/Countdown" method="start"]
+
+[connection signal="scrolled_down" from="UI/ScenarioScreen" to="UI/Instruction" method="show"]
 
 [connection signal="scrolled_up" from="UI/ScenarioScreen" to="Mechanics/SuperheroMode" method="off"]
 

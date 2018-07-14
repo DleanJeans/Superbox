@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://source/world/Arrow.gd" type="Script" id=1]
 [ext_resource path="res://assets/square.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://source/mechanics/ScreenExitNotifier.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/sfx/slomo-arrow-hit.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sfx/slomo-arrow-fly-by.wav" type="AudioStream" id=6]
+[ext_resource path="res://source/juice/Trail.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -32,7 +33,12 @@ random_pitch = 1.1
 custom_solver_bias = 0.0
 extents = Vector2( 10, 95 )
 
-[node name="Arrow" type="KinematicBody2D" groups=[
+[sub_resource type="Gradient" id=6]
+
+offsets = PoolRealArray( 0, 1 )
+colors = PoolColorArray( 1, 0, 0, 0, 1, 0, 0, 0.75 )
+
+[node name="Arrow" type="KinematicBody2D" index="0" groups=[
 "Arrows",
 ]]
 
@@ -47,7 +53,6 @@ speed = 2000
 
 [node name="Sprites" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
 position = Vector2( -0.169684, 0.0565624 )
 
 [node name="Shaft" type="Sprite" parent="Sprites" index="0"]
@@ -151,6 +156,18 @@ _sections_unfolded = [ "Collision" ]
 
 shape = SubResource( 5 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="TrailContainer" type="Node" parent="." index="7"]
+
+_sections_unfolded = [ "Pause" ]
+
+[node name="Trail" parent="TrailContainer" index="0" instance=ExtResource( 7 )]
+
+width = 10.0
+gradient = SubResource( 6 )
+_sections_unfolded = [ "Border", "Capping", "Fill", "Transform", "Visibility" ]
+parent = NodePath("../..")
+length = 30
 
 [connection signal="screen_exited" from="ScreenExitNotifier" to="." method="_disable"]
 

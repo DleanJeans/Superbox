@@ -20,6 +20,7 @@ func _physics_process(delta):
 
 func update_rotation():
 	rotation = velocity.angle_to_point(Vector2())
+	$TrailContainer/Trail.position = Vector2(-60, 0).rotated(rotation)
 
 func _process_collision():
 	if kinematic_collision == null: return
