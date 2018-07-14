@@ -2,6 +2,7 @@ extends Container
 
 signal paused
 signal unpaused
+signal unpausing
 
 func pause():
 	if game_is_paused():
@@ -16,6 +17,8 @@ func pause():
 func unpause():
 	if not game_is_paused():
 		return
+	
+	emit_signal("unpausing")
 	
 	$AnimationPlayer.play_backwards("Pause")
 	get_tree().paused = false
@@ -45,4 +48,5 @@ func _notification(what):
 			unpause()
 
 func _on_MenuButton_pressed():
+	unpause()
 	get_tree().change_scene("res://source/TitleScreen.tscn")

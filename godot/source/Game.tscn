@@ -27,7 +27,7 @@
 audio_stream = ExtResource( 19 )
 random_pitch = 1.25
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 [node name="Mechanics" type="Node" parent="." index="0"]
 
