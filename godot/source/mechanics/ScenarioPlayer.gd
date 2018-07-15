@@ -42,9 +42,10 @@ func _end_if_hero_survives():
 	var current_attempt
 	
 	while true:
-		current_attempt = GameData.attempts
 		yield(Shortcuts.arrow_shooter, "last_arrow")
 		yield(get_tree().create_timer(2), "timeout")
+		
+		current_attempt = GameData.attempts
 		
 		if current_attempt == GameData.attempts \
 		and not Shortcuts.hero.dead:
