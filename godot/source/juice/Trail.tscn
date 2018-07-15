@@ -23,6 +23,6 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Fill" ]
 parent = NodePath("Null")
 length = 50
-paused = null
+paused = false
 
 

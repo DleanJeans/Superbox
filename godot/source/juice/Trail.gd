@@ -2,13 +2,10 @@ extends Line2D
 
 export(NodePath) var parent
 export(int) var length = 20
-export(bool) onready var paused setget set_paused
+export(bool) onready var paused = false setget set_paused
 func set_paused(is_paused):
 	paused = is_paused
-	if is_paused == null: return
-	if paused:
-		$Timer.stop()
-	else: $Timer.start()
+	set_process(not paused)
 
 onready var _parent = get_node(parent)
 
